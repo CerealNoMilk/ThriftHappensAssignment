@@ -1,3 +1,7 @@
+//Kodie Wojewski
+//COMP2013 - Thrift Happens Assignment
+//Nov.9th.2026
+
 import type { ClothingProduct } from "../data/data";
 import type { CartItem, ProductInfo } from "./ThriftHappensApp";
 

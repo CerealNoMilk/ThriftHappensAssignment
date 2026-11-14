@@ -1,4 +1,7 @@
-// <p>Total: {(productInfo.itemQuantity * productInfo.price).toFixed(2)}</p>
+//Kodie Wojewski
+//COMP2013 - Thrift Happens Assignment
+//Nov.9th.2026
+
 import type { CartItem } from "./ThriftHappensApp";
 
 interface CartCardProps extends CartItem {
@@ -25,3 +28,4 @@ export default function CheckoutCard({
     </div>
   );
 }
+// <p>Total: {(productInfo.itemQuantity * productInfo.price).toFixed(2)}</p>

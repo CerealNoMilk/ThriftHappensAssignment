@@ -1,3 +1,7 @@
+//Kodie Wojewski
+//COMP2013 - Thrift Happens Assignment
+//Nov.9th.2026
+
 import CheckoutCard from "./CheckoutCard";
 import type { CartItem } from "./ThriftHappensApp";
 

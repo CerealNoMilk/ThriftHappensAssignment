@@ -1,3 +1,7 @@
+//Kodie Wojewski
+//COMP2013 - Thrift Happens Assignment
+//Nov.9th.2026
+
 import { useState } from "react";
 import { type ClothingProduct } from "../data/data";
 import ItemContainer from "./ItemsContainer";
@@ -22,6 +26,7 @@ export interface CartItem {
   total: number;
 }
 
+//Stoers user selected items and prices
 export default function ThriftHappensApp({ data }: ProductContainerProps) {
   const [productInfo, setProductInfo] = useState<ProductInfo[]>(
     data.map((clothingProduct: ClothingProduct) => ({
@@ -31,8 +36,10 @@ export default function ThriftHappensApp({ data }: ProductContainerProps) {
     })),
   );
 
+  //Stores items that are added to the cart
   const [cartItems, setCartItem] = useState<CartItem[]>([]);
 
+  //Determines what is left from stock after user chooses each item
   const stockAvailable = data.map((product) => {
     const cartItem = cartItems.find((item) => item.id === product.id);
     return {
@@ -42,7 +49,7 @@ export default function ThriftHappensApp({ data }: ProductContainerProps) {
   });
 
   //Handlers
-  //Handle Change Quetity function
+  //Handle Change Quantity function (does not go below 0 & available stock left)
   function handleChangeQuantity(id: number, delta: number) {
     setProductInfo((prevData) => {
       return prevData.map((info) =>
@@ -66,15 +73,18 @@ export default function ThriftHappensApp({ data }: ProductContainerProps) {
   function handleAddToCart(cartItem: CartItem) {
     const product = stockAvailable.find((item) => item.id === cartItem.id);
 
+    //Checks if product isn't there and makes sure selected quantity is0 or negative
     if (!product || cartItem.quantity <= 0) return;
-
+    //Makes sure the selected amount does not go over stock available
     const quantity = Math.min(cartItem.quantity, product.quantity);
-
+    //MAkes sure if a user adds 0 or negative, nothing should be added to cart
     if (quantity <= 0) return;
 
     setCartItem((prevItems) => {
       const currentItem = prevItems.find((item) => item.id === cartItem.id);
 
+      //Checks if the same product is ALREADY in cart and then updates its new qauntity
+      //and price. If not then it should add as a new item
       if (currentItem) {
         return prevItems.map((item) =>
           item.id === cartItem.id
@@ -100,6 +110,7 @@ export default function ThriftHappensApp({ data }: ProductContainerProps) {
     });
   }
 
+  //Removes all items currently in cart
   //handle Empty Cart button
   function handleEmptyCart() {
     setCartItem([]);
